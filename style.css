@@ -19,7 +19,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url(img/bg-prewed.jpg);
+  background-image: url(img/estetik-bg.jpg);
   background-size: cover;
   background-position: center;
   z-index: -1;
@@ -123,7 +123,7 @@ home p {
 }
 
 .info {
-  background-color: var(--bg);
+  background-image: url(img/estetik-bg.jpg);
   color: white;
   padding-top: 10rem;
   padding-bottom: 8rem;
