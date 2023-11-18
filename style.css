@@ -9,6 +9,7 @@ body {
   font-size: 1.2rem;
   font-family: 'Work Sans', sans-serif;
   min-height: 2000px;
+  overflow-x: hidden;
 }
 
 /* pseudo element */
