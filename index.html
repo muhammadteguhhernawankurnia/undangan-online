@@ -28,7 +28,7 @@
         class="hero w-100 h-100 p-3 mx-auto text-center d-flex justify-content-center align-items-center text-white">
 
         <main>
-            <h4>Kepada Bapak/Ibu/Saudara/i, </h4>
+            <h4>Kepada Bapak/Ibu/Saudara/i <span></span></h4>
             <h1>Dea & Daffa</h1>
             <p>Akan melangsungkan akad dan resepsi pernikahan dalam:</p>
 
@@ -121,6 +121,12 @@
                     <h2>Informasi Acara</h2>
                     <p class="alamat">Alamat : SDN 03 Rancaekek <br> Jl. Raya Majalaya - Rancaekek No.161, Rancaekek
                         Wetan, Kec. Rancaekek, Kabupaten Bandung </p>
+
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15841.608173411325!2d107.7570073!3d-6.9618092!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68c37e8eba912b%3A0x6ea3f5dd6443e6b9!2sSDN%20Rancaekek%2003!5e0!3m2!1sid!2sid!4v1700751699830!5m2!1sid!2sid"
+                        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
                     <a href="https://maps.app.goo.gl/XQTz6BZWKTH8YF9y9" target="_blank"
                         class="btn btn-light btn-sm">Klik untuk membuka peta</a>
                 </div>
@@ -393,6 +399,17 @@
         </div>
     </footer>
 
+    <div id="audio-container">
+        <audio id="song" autoplay loop>
+            <source src="audio/thoseYears.mp3" type="audio/mp3">
+        </audio>
+
+        <div class="audio-icon-wrapper" style="display: none;">
+            <i class="bi bi-pause-circle"></i>
+        </div>
+
+    </div>
+
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
         </script>
@@ -428,6 +445,10 @@
     <!-- disable scroll -->
     <script>
         const rootElement = document.querySelector(":root");
+        const audioIconWrapper = document.querySelector('.audio-icon-wrapper');
+        const audioIcon = document.querySelector('.audio-icon-wrapper i');
+        const song = document.querySelector('#song');
+        let isPlaying = false;
 
         function disableScroll() {
             scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -444,13 +465,32 @@
         function enableScroll() {
             window.onscroll = function () { }
             rootElement.style.scrollBehavior = 'smooth';
-            localStorage.setItem('opened', 'true');
+            playAudio();
         }
 
-        // simpan data ketika udh buka undangan
-        if (!localStorage.getItem('opened')) {
-            disableScroll();
+        function playAudio() {
+
+            song.volume = 0.1;
+            audioIconWrapper.style.display = 'flex';
+            song.play();
+            isPlaying = true;
         }
+
+        audioIconWrapper.onclick = function () {
+            if (isPlaying) {
+                song.pause();
+                audioIcon.classList.remove('bi-disc');
+                audioIcon.classList.add('bi-pause-circle');
+            } else {
+                song.play();
+                audioIcon.classList.add('bi-disc');
+                audioIcon.classList.remove('bi-pause-circle');
+            }
+
+            isPlaying = !isPlaying;
+        }
+
+        disableScroll();
     </script>
 
     <!-- simpan data di spreedsheet agar balik ke tampilan website -->
@@ -471,6 +511,16 @@
             });
         });
 
+    </script>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const nama = urlParams.get('nama') || '';
+
+        const namaContainer = document.querySelector('.hero h4 span');
+        namaContainer.innerText = `${nama},`;
+
+        document.querySelector('#nama').value = nama;
     </script>
 </body>
 
